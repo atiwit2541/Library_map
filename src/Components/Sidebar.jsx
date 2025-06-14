@@ -77,18 +77,6 @@ const Sidebar = ({
               </React.Fragment>
             ))}
           </div>
-          
-          {open && (
-            <li className="flex items-center text-sm text-white py-2 mb-4 pl-2">
-              <div 
-                className="flex items-center gap-x-2 cursor-pointer hover:text-teal-400 w-full"
-                onClick={handleLogout}
-              >
-                <BiLogOut />
-                <span>ออกจากระบบ</span>
-              </div>
-            </li>
-          )}
         </ul>
       </div>
     </div>
