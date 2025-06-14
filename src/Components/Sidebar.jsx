@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { BiLogOut } from "react-icons/bi";
 import Checkbox from './Checkbox';
 import { AiTwotoneLeftCircle } from "react-icons/ai";
-import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ 
   showGeneralBookstore, 
@@ -11,14 +9,7 @@ const Sidebar = ({
   toggleMallBookstore
 }) => {
   const [open, setOpen] = useState(true);
-  const navigate = useNavigate();
   
-  const handleLogout = () => {
-    if (window.confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
-      navigate('/', { replace: true });
-    }
-  };
-
   const Menus = [
     {
       subMenus: [
@@ -54,29 +45,27 @@ const Sidebar = ({
           </h1>
         </div>
         
-        <ul className="pt-3 flex flex-col h-[calc(100vh-120px)] justify-between">
-          <div>
-            {Menus.map((Menu, index) => (
-              <React.Fragment key={index}>
-                {open && Menu.subMenus && (
-                  <ul className="pl-2">
-                    {Menu.subMenus.map((subMenuItem, idx) => (
-                      <li key={idx} className="flex items-center justify-between text-sm text-white py-2">
-                        <div className="flex items-center gap-x-2 w-full">
-                          <Checkbox
-                            checked={subMenuItem.checked}
-                            onChange={subMenuItem.toggle}
-                          >
-                            <span className="text-white">{subMenuItem.title}</span>
-                          </Checkbox>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
+        <ul className="pt-3">
+          {Menus.map((Menu, index) => (
+            <React.Fragment key={index}>
+              {open && Menu.subMenus && (
+                <ul className="pl-2">
+                  {Menu.subMenus.map((subMenuItem, idx) => (
+                    <li key={idx} className="flex items-center justify-between text-sm text-white py-2">
+                      <div className="flex items-center gap-x-2 w-full">
+                        <Checkbox
+                          checked={subMenuItem.checked}
+                          onChange={subMenuItem.toggle}
+                        >
+                          <span className="text-white">{subMenuItem.title}</span>
+                        </Checkbox>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </React.Fragment>
+          ))}
         </ul>
       </div>
     </div>
