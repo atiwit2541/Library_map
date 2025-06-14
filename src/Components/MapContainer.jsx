@@ -81,7 +81,7 @@ const createProvinceImageOverlay = (imageUrl, bounds, paneName, imageSize) => {
 
 // 🏔️ เชียงใหม่ - ข้อมูลจริง (4908x3695)
 const GeojsonHideCNX = createProvinceImageOverlay(
-  '/images/cnx.png',
+  process.env.PUBLIC_URL + '/images/cnx.png',  // ✅
   [[16.51, 95.806], [20.953, 101.708]],
   'CNXPane',
   '4908x3695'
@@ -89,7 +89,7 @@ const GeojsonHideCNX = createProvinceImageOverlay(
 
 // 🏞️ พิษณุโลก - ข้อมูลจริง (4908x3699)
 const GeojsonHidePHK = createProvinceImageOverlay(
-  '/images/phk.png',
+  process.env.PUBLIC_URL + '/images/phk.png',  // ✅
   [[14.936, 97.73], [19.247, 103.45]],
   'PHKPane', 
   '4908x3699'
@@ -97,7 +97,7 @@ const GeojsonHidePHK = createProvinceImageOverlay(
 
 // 🏙️ กรุงเทพ - ข้อมูลจริง (4908x3695)
 const GeojsonHideBKK = createProvinceImageOverlay(
-  '/images/bkk.png',
+  process.env.PUBLIC_URL + '/images/bkk.png',  // ✅
   [[13.221, 99.866], [14.326, 101.335]],
   'BKKPane',
   '4908x3695'
