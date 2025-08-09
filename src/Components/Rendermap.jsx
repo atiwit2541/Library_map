@@ -3,29 +3,44 @@ import Sidebar from './Sidebar';
 import MapComponent from './MapContainer';
 
 const Rendermap = () => {
-  // เพิ่ม state แยกสำหรับแต่ละประเภทร้านหนังสือ
-  const [showGeneralBookstore, setShowGeneralBookstore] = useState(true);
-  const [showMallBookstore, setShowMallBookstore] = useState(true);
+  // ใช้ state แบบไดนามิกสำหรับแต่ละประเภทร้านหนังสือ
+  const [storeTypeStates, setStoreTypeStates] = useState({});
   const mapRef = useRef();
 
-  // ฟังก์ชันสำหรับ toggle แต่ละประเภท
-  const toggleGeneralBookstore = () => setShowGeneralBookstore(!showGeneralBookstore);
-  const toggleMallBookstore = () => setShowMallBookstore(!showMallBookstore);
+  // ฟังก์ชันสำหรับ toggle แต่ละประเภทแบบไดนามิก
+  const toggleStoreType = (storeType) => {
+    setStoreTypeStates(prev => ({
+      ...prev,
+      [storeType]: !prev[storeType]
+    }));
+  };
+
+  // ฟังก์ชันสำหรับตั้งค่า state เริ่มต้น
+  const initializeStoreTypeStates = (storeTypes) => {
+    const initialStates = {};
+    storeTypes.forEach(type => {
+      if (!(type in storeTypeStates)) {
+        initialStates[type] = true; // เริ่มต้นให้แสดงทั้งหมด
+      }
+    });
+    if (Object.keys(initialStates).length > 0) {
+      setStoreTypeStates(prev => ({ ...prev, ...initialStates }));
+    }
+  };
 
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-grow">
         <Sidebar 
-          showGeneralBookstore={showGeneralBookstore}
-          toggleGeneralBookstore={toggleGeneralBookstore}
-          showMallBookstore={showMallBookstore}
-          toggleMallBookstore={toggleMallBookstore}
+          storeTypeStates={storeTypeStates}
+          toggleStoreType={toggleStoreType}
+          onStoreTypesLoaded={initializeStoreTypeStates}
         />
         <div className="flex-grow relative">
           <MapComponent 
             ref={mapRef} 
-            showGeneralBookstore={showGeneralBookstore}
-            showMallBookstore={showMallBookstore}
+            storeTypeStates={storeTypeStates}
+            onStoreTypesLoaded={initializeStoreTypeStates}
           />
         </div>
       </div>

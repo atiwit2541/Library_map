@@ -67,9 +67,9 @@ const BookstoreLegend = ({ storeTypes, visible }) => {
                   border-radius: 3px;
                 ">
                 <div style="
-                  color: ${storeType.color}; 
                   flex: 1;
                   font-weight: 500;
+                  color: #333;
                 ">
                   ${storeType.name || 'ไม่ระบุ'}
                 </div>
@@ -124,9 +124,9 @@ const BookstoreLegend = ({ storeTypes, visible }) => {
                   border-radius: 3px;
                 ">
                 <div style="
-                  color: ${storeType.color}; 
                   flex: 1;
                   font-weight: 500;
+                  color: #333;
                 ">
                   ${storeType.name || 'ไม่ระบุ'}
                 </div>

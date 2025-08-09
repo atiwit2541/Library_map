@@ -176,23 +176,28 @@ const LayerChangeHandler = () => {
   return null;
 };
 
-const BookstoreMarkersManager = ({ showGeneralBookstore, showMallBookstore }) => {
+const BookstoreMarkersManager = ({ storeTypeStates, onStoreTypesLoaded }) => {
   const [storeTypes, setStoreTypes] = useState([]);
+  const [legendData, setLegendData] = useState([]);
   
   const handleStoreTypesLoaded = useCallback((typesData) => {
     setStoreTypes(typesData);
   }, []);
 
+  const handleLegendDataLoaded = useCallback((legendData) => {
+    setLegendData(legendData);
+  }, []);
+
   return (
     <>
       <MapMarkersLibrary 
-        showGeneralBookstore={showGeneralBookstore}
-        showMallBookstore={showMallBookstore}
+        storeTypeStates={storeTypeStates}
         onStoreTypesLoaded={handleStoreTypesLoaded}
+        onLegendDataLoaded={handleLegendDataLoaded}
       />
       
       <BookstoreLegend 
-        storeTypes={storeTypes} 
+        storeTypes={legendData} 
         visible={true}
       />
     </>
@@ -202,8 +207,8 @@ const BookstoreMarkersManager = ({ showGeneralBookstore, showMallBookstore }) =>
 // ===== Main Map Component =====
 
 const MapComponent = React.forwardRef(({ 
-  showGeneralBookstore = true, 
-  showMallBookstore = true 
+  storeTypeStates = {},
+  onStoreTypesLoaded
 }, ref) => {
   
   // 🏔️ ใช้การตั้งค่าของเชียงใหม่เป็น default (เหมือนกับตอนกดเลือกเชียงใหม่)
@@ -250,8 +255,8 @@ const MapComponent = React.forwardRef(({
       </LayersControl>
       
       <BookstoreMarkersManager 
-        showGeneralBookstore={showGeneralBookstore}
-        showMallBookstore={showMallBookstore}
+        storeTypeStates={storeTypeStates}
+        onStoreTypesLoaded={onStoreTypesLoaded}
       />
     </MapContainer>
   );
